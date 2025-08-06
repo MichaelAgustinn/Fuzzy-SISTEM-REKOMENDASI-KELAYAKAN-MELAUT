@@ -20,7 +20,7 @@ public class Fuzzy {
     else if (x >= b)
       return 0;
     else
-      return (b - x) / (b - a);
+      return (b - x + 0.0) / (b - a);
   }
 
   static double segitiga(double x, double a, double b, double c) {
@@ -29,9 +29,9 @@ public class Fuzzy {
     else if (x == b)
       return 1;
     else if (x > a && x < b)
-      return (x - a) / (b - a);
+      return (x - a + 0.0) / (b - a);
     else
-      return (c - x) / (c - b);
+      return (c - x + 0.0) / (c - b);
   }
 
   static double naik(double x, double a, double b) {
@@ -40,7 +40,7 @@ public class Fuzzy {
     else if (x >= b)
       return 1;
     else
-      return (x - a) / (b - a);
+      return (x - a + 0.0) / (b - a);
   }
 
   // ! gelombang
@@ -48,7 +48,7 @@ public class Fuzzy {
   // * sedang = 0.75 - 1.5
   // * tinggi = 1.25 - 2
   public static double gelombangRendah(double x) {
-    return turun(x, 0, 1);
+    return turun(x, 0.0, 1.0);
   }
 
   public static double gelombangSedang(double x) {
@@ -56,7 +56,7 @@ public class Fuzzy {
   }
 
   public static double gelombangTinggi(double x) {
-    return naik(x, 1.25, 2);
+    return naik(x, 1.25, 2.0);
   }
   // ! gelombang end
 
@@ -65,15 +65,15 @@ public class Fuzzy {
   // * sedang = 1.5 - 5
   // * tinggi = 4 - 7.7
   public static double anginRendah(double x) {
-    return turun(x, 0, 2);
+    return turun(x, 0.0, 2.0);
   }
 
   public static double anginSedang(double x) {
-    return segitiga(x, 1.5, 3.25, 5);
+    return segitiga(x, 1.5, 3.25, 5.0);
   }
 
   public static double anginTinggi(double x) {
-    return naik(x, 4, 7.7);
+    return naik(x, 4.0, 7.7);
   }
   // ! angin end
 
@@ -82,7 +82,7 @@ public class Fuzzy {
   // * sedang = 1.0 - 4.0
   // * tinggi = 3.5 - 5.5
   public static double hujanRendah(double x) {
-    return turun(x, 0, 2);
+    return turun(x, 0.0, 2.0);
   }
 
   public static double hujanSedang(double x) {
@@ -94,4 +94,23 @@ public class Fuzzy {
   }
   // ! curah hujan end
 
+  // ! output aman
+  public static double outputLayak(double alp) {
+    return 40.0 - alp * (40.0 - 0.0);// range 0 - 40 (grafik turun)
+  }
+  // !otuput aman end
+
+  // ! output bahaya
+  public static double outputTidakLayak(double alp) {
+    return alp * (100 - 60) + 60.0; // range 60 - 100 (grafik naik)
+  }
+  // !otuput bahaya end
+
+  public static String hasil(double output) {
+    if (output < 44.8) {
+      return "Layak";
+    } else {
+      return "Tidak Layak";
+    }
+  }
 }

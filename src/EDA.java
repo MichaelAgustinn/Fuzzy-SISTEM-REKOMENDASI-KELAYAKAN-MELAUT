@@ -5,7 +5,18 @@ import java.util.ArrayList;
 
 public class EDA {
 
-  void printData(ArrayList<Double[]> simpan) {
+  public static double min(double... nilai) {
+    double min = Double.MAX_VALUE;
+    for (double d : nilai) {
+      if (d < min) {
+        min = d;
+      }
+    }
+    return min;
+  }
+
+  public static void printData(ArrayList<Double[]> simpan) {
+
     for (int i = 0; i < simpan.size(); i++) {
       Double[] baris = simpan.get(i);
       System.out.print("Baris ke-" + i + ": ");
@@ -16,11 +27,11 @@ public class EDA {
     }
   }
 
-  ArrayList<Double[]> bacaData(String namaFile, ArrayList<Double[]> simpan) {
+  public static ArrayList<Double[]> bacaData(String namaFile, ArrayList<Double[]> simpan) {
     // ArrayList<Double[]> simpan = new ArrayList<>();
     String line;
-    try (
-        BufferedReader br = new BufferedReader(new FileReader("src/resource/" + "data" + ".csv"))) {
+    try (BufferedReader br =
+        new BufferedReader(new FileReader("src/resource/" + namaFile + ".csv"))) {
       br.readLine();
       while ((line = br.readLine()) != null) {
         String[] baca = line.split(",");
