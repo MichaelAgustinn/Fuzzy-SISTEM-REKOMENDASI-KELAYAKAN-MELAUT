@@ -23,16 +23,19 @@ public class Fuzzy {
       return (b - x + 0.0) / (b - a);
   }
 
-  static double segitiga(double x, double a, double b, double c) {
-    if (x <= a || x >= c)
-      return 0;
-    else if (x == b)
-      return 1;
-    else if (x > a && x < b)
-      return (x - a + 0.0) / (b - a);
-    else
-      return (c - x + 0.0) / (c - b);
+  // 0, 1.5, 2.0, 4.0, 5.0
+  static double bahu(double x, double a, double b, double c, double d) {
+    if (x <= a || x >= d) {
+      return 0.0;
+    } else if (x >= b && x <= c) {
+      return 1.0;
+    } else if (x > a && x < b) {
+      return (x - a) / (b - a);
+    } else { // x > c && x < d
+      return (d - x) / (d - c);
+    }
   }
+
 
   static double naik(double x, double a, double b) {
     if (x <= a)
@@ -52,7 +55,7 @@ public class Fuzzy {
   }
 
   public static double gelombangSedang(double x) {
-    return segitiga(x, 0.75, 1.125, 1.5);
+    return bahu(x, 0.75, 1, 1.25, 1.50);
   }
 
   public static double gelombangTinggi(double x) {
@@ -69,7 +72,7 @@ public class Fuzzy {
   }
 
   public static double anginSedang(double x) {
-    return segitiga(x, 1.5, 3.25, 5.0);
+    return bahu(x, 1.5, 2.0, 4.0, 5.0);
   }
 
   public static double anginTinggi(double x) {
@@ -86,7 +89,7 @@ public class Fuzzy {
   }
 
   public static double hujanSedang(double x) {
-    return segitiga(x, 1.0, 2.5, 4.0);
+    return bahu(x, 1.0, 2.0, 3.0, 4.0);
   }
 
   public static double hujanTinggi(double x) {

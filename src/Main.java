@@ -8,6 +8,7 @@ public class Main {
         ArrayList<Double[]> simpan = new ArrayList<>();
         EDA.bacaData("data", simpan);
 
+        // RuleTest.printTest();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
 
@@ -16,17 +17,17 @@ public class Main {
                 double angin = simpan.get(i)[1];
                 double hujan = simpan.get(i)[2];
 
-                double gR = Fuzzy.gelombangRendah(gelombang);
-                double gS = Fuzzy.gelombangSedang(gelombang);
-                double gT = Fuzzy.gelombangTinggi(gelombang);
+                double gR = gelombang;
+                double gS = gelombang;;
+                double gT = gelombang;;
 
-                double aR = Fuzzy.anginRendah(angin);
-                double aS = Fuzzy.anginSedang(angin);
-                double aT = Fuzzy.anginTinggi(angin);
+                double aR = angin;;
+                double aS = angin;
+                double aT = angin;
 
-                double hR = Fuzzy.hujanRendah(hujan);
-                double hS = Fuzzy.hujanSedang(hujan);
-                double hT = Fuzzy.hujanTinggi(hujan);
+                double hR = hujan;
+                double hS = hujan;
+                double hT = hujan;
 
                 double a1 = AlphaPredik.rule1(gR, aR, hR);
                 double a2 = AlphaPredik.rule2(gR, aR, hS);
